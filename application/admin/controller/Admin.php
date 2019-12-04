@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
-
+use app\common\lib\IAuth;
 class Admin extends Controller {
 	function add() {
 		if(request()->isPost()){
@@ -12,7 +12,7 @@ class Admin extends Controller {
 			if(!$validate->check($data)) {
 				$this->error($validate->getError());
 			}
-			$data['password'] = md5($data['password'].'_#tsmeng');
+			$data['password'] = IAuth::setPassword($data['password']);
 			$data['status'] = 1;
 			try {
 				//数据库的表明明是ent_admin_user在不指定表的情况下怎么知道是将数据插入哪一张表
