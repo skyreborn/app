@@ -3,7 +3,13 @@ namespace app\admin\controller;
 
 use think\Controller;
 use app\common\lib\IAuth;
-class Admin extends Controller {
+
+class Admin extends Base {
+	/**
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-05
+	 * @return void
+	 */
 	function add() {
 		if(request()->isPost()){
 			$data = input('post.');

@@ -4,11 +4,42 @@ namespace app\admin\controller;
 use think\Controller;
 use app\common\lib\IAuth;
 
-class Login extends Controller {
-	public function index() {
-		return $this->fetch();
+class Login extends Base {
+
+	/**
+	 * 重写base里面的初始化方法，避免反复重定向引发死循环
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-05
+	 * @return void
+	 */
+	public function _initialize(){
+
 	}
-	//登录相关业务
+
+	/**
+	 * 返回登录页面
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-05
+	 * @return void
+	 */	
+	public function index() {
+		$isLogin = $this->isLogin();
+		if($isLogin) {
+			return $this->redirect('index/index');
+		}else {
+			return $this->fetch();
+		}
+	}
+
+	/**
+	 * 登录相关业务
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-05
+	 * @return void
+	 */
 	public function check() {
 		if(request()->isPost()) {
 			$data = input('post.');
@@ -53,7 +84,14 @@ class Login extends Controller {
 				$this->error('请求不合法！');
 		}
 	}
-	//退出登录
+
+	/**
+	 * 退出登录
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-05
+	 * @return void
+	 */
 	public function logout() {
 		session(null, config('admin.session_user_scope'));
 		$this->redirect('login/index');
