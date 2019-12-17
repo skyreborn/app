@@ -16,15 +16,14 @@
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-       <span class="select-box">
-          <select name="" id="">
-              <option value="nba">nba</option>
-              <option value="明星">明星</option>
-              <option value="港台">港台</option>
-          </select>
-        </span>
-       </div>
+      <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="catid" class="select">
+                 {volist name="cats" id="vo"}
+                  <option value="{$key}">{$vo}</option>
+                  {/volist}
+                  
+                </select>
+				</span> </div>
     </div>
 
     <div class="row cl">

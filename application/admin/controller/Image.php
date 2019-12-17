@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\common\lib\Upload;
+
 /**
  * 后台图片上传相关逻辑
  *
@@ -47,7 +48,6 @@ class Image extends Controller {// 继承Base进行权限验证会引发302重�
      * @return json
      */
     public function upload() {
-        $image = Upload::image();
         try {
             $image = Upload::image();
         }catch (\Exception $e) {

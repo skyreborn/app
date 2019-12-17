@@ -7,17 +7,14 @@
 	 <span class="select-box inline">
 		<select name="catid" class="select">
           <option value="0">全部分类</option>
-          {volist name="cats" id="vo"}
-          <option value="{$key}" {if condition="$key eq $catid"}selected="selected"{/if} > {$vo}</option>
-          {/volist}
-
-        </select>
+          <option  > 明星</option>
+    </select>
 		</span> 日期范围：
-      <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$start_time}" style="width:120px;" >
+      <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="" style="width:120px;" >
       -
-      <input type="text" name="end_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="{$end_time}"  style="width:120px;">
+      <input type="text" name="end_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value=""  style="width:120px;">
 
-      <input type="text" name="title" id="" value="{$title}" placeholder=" 资讯名称" style="width:250px" class="input-text">
+      <input type="text" name="title" id="" value="" placeholder=" 资讯名称" style="width:250px" class="input-text">
       <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
     </form>
   </div>
@@ -38,19 +35,17 @@
       </tr>
       </thead>
       <tbody>
-      {volist  name="news" id="vo"}
       <tr class="text-c">
         <td><input type="checkbox" value="" name=""></td>
-        <td>{$vo.id}</td>
-        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看">{$vo.title}</u></td>
-        <td>{$vo.catid|getCatName}</td>
-        <td><img width="60" height="60" class="picture-thumb" src="{$vo.image}"></td>
-        <td>{$vo.update_time}</td>
-        <td>{$vo.is_position|isYesNo}</td>
-        <td class="td-status">{$vo.status|status=$vo.id, ###}</td>
-        <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="app_del(this)" href="javascript:;" title="删除" del_url="{:url('news/delete', ['id'=>$vo.id])}"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+        <td></td>
+        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看"></u></td>
+        <td></td>
+        <td><img width="60" height="60" class="picture-thumb" src=""></td>
+        <td></td>
+        <td></td>
+        <td class="td-status"></td>
+        <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="app_del(this)" href="javascript:;" title="删除" del_url=""><i class="Hui-iconfont">&#xe6e2;</i></a></td>
       </tr>
-      {/volist}
       </tbody>
     </table>
     <div id="laypage"></div>
@@ -64,13 +59,13 @@
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-  var url = '{:url("news/index")}'+'?{$query}';
+  var url = '';
   //alert(url);
   laypage({
     cont: 'laypage', //容器。值支持id名、原生dom对象，jquery对象,
-    pages: '{$pageTotal}', //总页数
+    pages: '', //总页数
     skin: '#5FB878', //皮肤
-    curr :'{$curr}',
+    curr :'',
     jump: function(e, first){ //触发分页后的回调
       if(!first){ //一定要加此判断，否则初始时会无限刷新
         //alert(url+'?page='+e.curr);
