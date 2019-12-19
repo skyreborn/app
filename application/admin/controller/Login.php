@@ -54,7 +54,7 @@ class Login extends Base {
 				$this->error($validate->getError());
 			}
 			try {
-				//获取到数据对象
+				//获取到数据对象(简单的逻辑没必要另外写到model层)
 				$user = model('AdminUser')->get(['username' => $data['username']]);
 			}catch(\Exception $e){
 				$this->error($e->getMessage());

@@ -5,7 +5,7 @@ $(function() {
         buttonText   : '图片上传',
         fileTypeDesc : 'Image files',
         fileObjName  : 'file',
-        fileTypeExts : '*.gif;*.jpg;*.png',
+        fileTypeExts : '*.gif;*.jpg;*.png;*.jpeg',
         onUploadSuccess : function(file, data, response) {
             // 需要扩展内容
             if(response) {

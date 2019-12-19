@@ -1,13 +1,15 @@
 <!--header-->
 {include file="public/_meta" title="娱乐资讯"/}
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span> 资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 新闻管理 <span class="c-gray en">&gt;</span> 新闻列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
   <div class="text-c">
     <form action="{:url('news/index')}" method="get">
 	 <span class="select-box inline">
 		<select name="catid" class="select">
           <option value="0">全部分类</option>
-          <option  > 明星</option>
+          {volist name="cats" id="vo"}
+            <option value="{$key}">{$vo}</option>
+          {/volist}
     </select>
 		</span> 日期范围：
       <input type="text" name="start_time" class="input-text" id="countTimestart" onfocus="selecttime(1)" value="" style="width:120px;" >
@@ -35,22 +37,25 @@
       </tr>
       </thead>
       <tbody>
+        {volist name="news" id="vo"}
       <tr class="text-c">
         <td><input type="checkbox" value="" name=""></td>
-        <td></td>
-        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看"></u></td>
-        <td></td>
-        <td><img width="60" height="60" class="picture-thumb" src=""></td>
-        <td></td>
-        <td></td>
-        <td class="td-status"></td>
+        <td>{$vo.id}</td>
+        <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看">{$vo.title}</u></td>
+        <td>{$vo.catid|getCatName}</td>
+        <td><img width="60" height="60" class="picture-thumb" src="{$vo.image}"></td>
+        <td>{$vo.update_time}</td>
+        <td>{$vo.is_position|isYesNo}</td>
+        <td class="td-status">{$vo.status}</td>
         <td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="app_del(this)" href="javascript:;" title="删除" del_url=""><i class="Hui-iconfont">&#xe6e2;</i></a></td>
       </tr>
+      {/volist}
       </tbody>
     </table>
+    <!-- 模式二开源插件分页容器 -->
     <div id="laypage"></div>
   </div>
-
+  <!-- 模式一tp5.0内置分页调用conmmon.php里面的pagination($news)方法 -->
 </div>
 <!--header-->
 {include file="public/_footer" /}
@@ -59,17 +64,18 @@
 <script type="text/javascript" src="__STATIC__/hadmin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="__STATIC__/hadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-  var url = '';
+  var url = '{:url("News/index")}'+'?{$query}';
   //alert(url);
   laypage({
     cont: 'laypage', //容器。值支持id名、原生dom对象，jquery对象,
-    pages: '', //总页数
+    pages: '{$pageTotal}', //总页数
     skin: '#5FB878', //皮肤
-    curr :'',
+    curr :'{$curr}',
     jump: function(e, first){ //触发分页后的回调
       if(!first){ //一定要加此判断，否则初始时会无限刷新
         //alert(url+'?page='+e.curr);
         location.href = url+'&page='+e.curr;
+        console.log(url+'&page='+e.curr);
       }
     }
   });

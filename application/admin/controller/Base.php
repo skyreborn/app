@@ -10,6 +10,10 @@ use think\Controller;
  * @DateTime 2019-12-05
  */
 class Base extends Controller {
+	// 第几页
+	public $page = '';
+	// 每页显示条数
+	public $size = '';
 	// 初始化的方法
 	public function _initialize() {
 		// 判断用户是否登录
@@ -30,5 +34,19 @@ class Base extends Controller {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 获取分页page size 内容
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-19
+	 * @param [type] $data
+	 * @return void
+	 */
+	public function getPageAndSize($data) {
+
+        $this->page = !empty($data['page']) ? $data['page'] : 1;
+        $this->size = !empty($data['size']) ? $data['size'] : config('paginate.list_rows');		
 	}
 } 
