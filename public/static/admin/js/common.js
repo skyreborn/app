@@ -2,7 +2,7 @@
  * @Author: 1127820180@qq.com 
  * @Date: 2019-12-13 19:18:03 
  * @Last Modified by: 1127820180@qq.com
- * @Last Modified time: 2019-12-18 21:24:20
+ * @Last Modified time: 2019-12-19 19:35:14
  */
 function singwaapp_save(form) {
     // 表单数据
@@ -20,5 +20,25 @@ function singwaapp_save(form) {
         }else if(result.code == 1){
             self.location=result.data.jump_url;
         } 
-    }, 'JSON');
+    }, 'JSON');  
 }
+
+/**
+ * 时间插件适配的一个方法
+ * 解决日期插件My97 DatePicker与Think php模版标签冲突
+ * @param {*} flag 
+ */
+function selecttime(flag){
+    if(flag==1){
+        var endTime = $("#countTimeend").val();
+        if(endTime != ""){
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:endTime})}else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})}
+    }else{
+        var startTime = $("#countTimestart").val();
+        if(startTime != ""){
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:startTime})}else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})}
+    }
+}
+

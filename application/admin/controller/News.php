@@ -13,40 +13,55 @@ class News extends Base {
 
     /**
      * 新闻列表逻辑
-     *
+     * 获取数据然后将数据填充到模板(复杂的逻辑重写到model层能更好的复用)
      * @Author sky 1127820180@qq.com
      * @DateTime 2019-12-18
      * @return void
      */
     public function index() {
-        // 获取数据 然后将数据填充到模板(复杂的逻辑重写到model层能更好的复用)
-
         // 模式一通过tp5内置的分页功能
         //$news = model('News')->getNews();
 
         // 模式二通过开源插件方式
         $data = input('param.');
+        // 使用http_build_query将key=>value的数组转变为url字符串
         $query = http_build_query($data);
+        // 查询条件数组
         $whereData= [];
-
+        // 按照时间段查询条件
+        if(!empty($data['start_time']) && !empty('end_time') && $data['end_time'] > $data['start_time']) {
+            $whereData['create_time'] = [
+                ['gt', strtotime($data['start_time'])],
+                ['lt', strtotime($data['end_time'])],
+            ];
+        }
+        // 按照栏目查询条件
+        if(!empty($data['catid'])) {
+            $whereData['catid'] = intval($data['catid']);
+        }
+        // 按照标题查询条件
+        if(!empty($data['title'])) {
+            $whereData['title'] = ['like', '%'.$data['title'].'%'];
+        }
         // 调用方法获取当前页和每页数据量
-        $this->getPageAndSize($data);
-        // 当前页
-        $whereData['page'] = $this->page;
-        $whereData['size'] = $this->size;
+        $this->getPageAndSizeAndFrom($data);
         // 获取满足条件的数据
-        $news = model('News')->getNewsByCondition($whereData);
+        $news = model('News')->getNewsByCondition($whereData,$this->from,$this->size);
         // 获取满足条件的数据总数
         $total = model('News')->getNesCountByCondition($whereData);
         // 数据总页数
-        $pageTotal = ceil($total/$whereData['size']);
+        $pageTotal = ceil($total/$this->size);
 
         return $this->fetch('',[
             'news' => $news,
             'cats' => config('cat.lists'),
             'pageTotal' => $pageTotal,
-            'curr' =>  $whereData['page'],
+            'curr' =>  $this->page,
             'query' => $query,
+            'start_time' => empty($data['start_time']) ? '' : $data['start_time'],
+            'end_time' => empty($data['end_time']) ? '' : $data['end_time'],
+            'catid' => empty($data['catid']) ? '' : $data['catid'],
+            'title' => empty($data['title']) ? '' : $data['title'],
         ]);
     }
 

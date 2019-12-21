@@ -32,20 +32,18 @@ class News extends Base {
      * @param array $param
      * @return object
      */
-    public function getNewsByCondition($param = []) {
+    public function getNewsByCondition($condition = [], $from = 0, $size = 5) {
         // 筛选条件
         $condition['status'] = [
             'neq', config('code.status_delete')
         ];
         // 排序方式
         $order = ['id' => 'desc'];
-        // 从那条数据开始取
-        $from = ($param['page'] - 1) * $param['size'];
-
         $result = $this->where($condition)
-        ->limit($from, $param['size'])
+        ->limit($from, $size)
         ->order($order)
         ->select();
+        //echo $this->getLastSql();
         return $result;
     }
 
@@ -57,7 +55,7 @@ class News extends Base {
      * @param array $param
      * @return int
      */
-    public function getNesCountByCondition($param = []) {
+    public function getNesCountByCondition($condition = []) {
         // 筛选条件
         $condition['status'] = [
             'neq', config('code.status_delete')
