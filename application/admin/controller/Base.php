@@ -16,6 +16,8 @@ class Base extends Controller {
 	public $size = '';
 	// 查询条件的起始值
 	public $from = 0;
+	// 数据库表名字
+	public $model = '';
 	// 初始化的方法
 	public function _initialize() {
 		// 判断用户是否登录
@@ -51,5 +53,32 @@ class Base extends Controller {
         $this->page = !empty($data['page']) ? $data['page'] : 1;
 		$this->size = !empty($data['size']) ? $data['size'] : config('paginate.list_rows');	
 		$this->from = ($this->page - 1) * ($this->size);
+	}
+
+	/**
+	 * 删除逻辑（一般是通过修改字段状态实现，避免误删，脏数据）
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-21
+	 * @param integer $id
+	 * @return json
+	 */
+	public function delete($id = 0) {
+		if(!intval($id)) {
+			return $this->result('', 0, 'ID不合法');
+		}
+
+		// 动态获取表（控制器类名和表名字一致）如果不一致的话呢？
+		$model = $this->model ? $this->model : request()->controller();
+		try {
+			$res = model($model)->save(['status' => -1], ['id' => $id]);
+		}catch(\Exception $e) {
+			return $this->result('', 0, $e->getMessage());
+		}
+
+		if($res) {
+			return $this->result(['jump_url' => $_SERVER['HTTP_REFERER']], 1, 'ok');
+		}
+		return $this->result('', 0, '删除失败');
 	}
 } 
