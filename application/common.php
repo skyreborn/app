@@ -12,7 +12,7 @@
 // 应用公共文件
 
 /**
- * 分页样式方法(需要在模板里面调用方法{:pagination($news)})
+ * tp5内置分页样式方法(需要在模板里面调用方法{:pagination($news)})
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-18
@@ -53,4 +53,28 @@ function getCatName($catId) {
  */
 function isYesNo($num) {
     return $num ? '<span style="color:red"> 是 </span>' : '<span> 否 </span>';
+}
+
+/**
+ * 状态
+ *
+ * @Author sky 1127820180@qq.com
+ * @DateTime 2019-12-22
+ * @param [type] $id
+ * @param [type] $status
+ * @return string
+ */
+function status($id, $status) {
+    $controller = request()->controller();
+    $sta = $status == 1 ? 0 : 1;
+    $url = url($controller.'/status', ['id' => $id, 'status' => $sta]);
+
+    if($status == 1) {
+        $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'>
+        <span class='label label-success radius'>正常</span></a>";
+    }else if($status == 0) {
+        $str = "<a href='javascript:;' title='修改状态' status_url='".$url."' onclick='app_status(this)'>
+        <span class='label label-danger radius'>待审</span></a>";
+    }
+    return $str;
 }

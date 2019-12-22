@@ -68,7 +68,9 @@ class Base extends Controller {
 			return $this->result('', 0, 'ID不合法');
 		}
 
-		// 动态获取表（控制器类名和表名字一致）如果不一致的话呢？
+		//通过id查询记录是否存在（待完善）
+
+		// 动态获取表（控制器类名和表名字一致）如果不一致的话呢？(在调用的控制器手动赋值$this->model="")
 		$model = $this->model ? $this->model : request()->controller();
 		try {
 			$res = model($model)->save(['status' => -1], ['id' => $id]);
@@ -80,5 +82,32 @@ class Base extends Controller {
 			return $this->result(['jump_url' => $_SERVER['HTTP_REFERER']], 1, 'ok');
 		}
 		return $this->result('', 0, '删除失败');
+	}
+
+	/**
+	 * 修改状态逻辑
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-22
+	 * @return void
+	 */
+	public function status() {
+		$data = input('param.');
+		// tp5 validate 机制校验 id status(未完待续)
+
+		// 通过id去库中查询记录是否存在（未完待续）
+
+		$model = $this->model ? $this->model : request()->controller();
+		try {
+			$res = model($model)->save(['status' => $data['status']], ['id' => $data['id']]);
+		}catch(\Exception $e) {
+			return $this->result('', 0, $e->getMessage());
+		}
+
+		if($res) {
+			return $this->result(['jump_url' => $_SERVER['HTTP_REFERER']], 1, 'ok');
+		}
+		return $this->result('', 0, '修改失败');
+
 	}
 } 

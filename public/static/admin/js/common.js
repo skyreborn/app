@@ -2,7 +2,7 @@
  * @Author: 1127820180@qq.com 
  * @Date: 2019-12-13 19:18:03 
  * @Last Modified by: 1127820180@qq.com
- * @Last Modified time: 2019-12-21 23:11:25
+ * @Last Modified time: 2019-12-22 15:46:51
  */
 function singwaapp_save(form) {
     // 表单数据
@@ -50,6 +50,33 @@ function app_del(obj){
     // 获取url地址
     var url = $(obj).attr('del_url');
 	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: url,
+			dataType: 'json',
+			success: function(data){
+                if(data.code == 1) {
+                    //执行跳转
+                    self.location=data.data.jump_url;
+                }else if(data.code == 0) {
+                    layer.msg(data.msg, {icon:2, time:2000});
+                }
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});
+	});
+}
+
+/**
+ * 通用化修改操作
+ * @param {*} obj 
+ */
+function app_status(obj){
+    // 获取url地址
+    var url = $(obj).attr('status_url');
+	layer.confirm('确认要修改吗？',function(index){
 		$.ajax({
 			type: 'POST',
 			url: url,

@@ -46,7 +46,7 @@
         <td><img width="60" height="60" class="picture-thumb" src="{$vo.image}"></td>
         <td>{$vo.update_time}</td>
         <td>{$vo.is_position|isYesNo}</td>
-        <td class="td-status">{$vo.status}</td>
+        <td class="td-status">{$vo.status|status=$vo.id, ###}</td>
         <td class="f-14 td-manage"> 
           <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" 
           href="javascript:;" title="编辑">

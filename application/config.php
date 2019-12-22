@@ -236,7 +236,7 @@ return [
     'paginate'               => [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
-        'list_rows' => 2,
+        'list_rows' => 5,
     ],
     //验证码配置
     'captcha' => [
