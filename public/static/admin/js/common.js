@@ -1,10 +1,31 @@
-/*
- * @Author: 1127820180@qq.com 
- * @Date: 2019-12-13 19:18:03 
- * @Last Modified by: 1127820180@qq.com
- * @Last Modified time: 2019-12-22 15:46:51
+/**
+ * 新闻添加
+ * @param {*} form 
  */
-function singwaapp_save(form) {
+function app_save(form) {
+    // 表单数据
+    var data = $(form).serialize();
+    // url地址
+    var url = $(form).attr('url');
+    console.log(url);
+    // ajax发送数据到后台
+    $.post(url, data, function(result) {
+        console.log(result);
+        if(result.code == 0) {
+            layer.msg(result.msg,{icon:5, time:2000});
+        }else if(result.code == 2) {
+            layer.msg(result.msg,{icon:5, time:2000});
+        }else if(result.code == 1){
+            self.location=result.data.jump_url;
+        } 
+    }, 'JSON');  
+}
+
+/**
+ * 新闻编辑
+ * @param {*} form 
+ */
+function app_edit(form) {
     // 表单数据
     var data = $(form).serialize();
     // url地址
@@ -70,7 +91,7 @@ function app_del(obj){
 }
 
 /**
- * 通用化修改操作
+ * 通用化新闻发布状态修改操作
  * @param {*} obj 
  */
 function app_status(obj){
@@ -94,4 +115,20 @@ function app_status(obj){
 			},
 		});
 	});
+}
+
+/**新闻编辑
+ * 
+ * @param {*} title 
+ * @param {*} obj 
+ */
+function article_edit(title,obj){
+    // 获取url地址
+    var url = $(obj).attr('edit_url');    
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
 }

@@ -99,4 +99,47 @@ class News extends Base {
             ]);
         }
     }
+
+    /**
+     * 修改待完善
+     *
+     * @Author sky 1127820180@qq.com
+     * @DateTime 2019-12-24
+     * @return void
+     */
+    public function edit() {
+        if(request()->isPost()) {
+            $data = input('post.');
+            $data['id'] = intval($data['id']);
+            //var_dump($data);
+            //通过validate验证表单数据
+            $validate = validate('News');
+            if(!$validate->check($data)) {
+                $this->error($validate->getError());
+            } 
+            try {
+                $res = model('News')->allowField(true)->save($_POST,['id' => $data['id']]);
+                //echo $this->getLastSql();exit;
+            }catch(\Exception $e) {
+                return $this->result('', 0, $e->getMessage());
+            }
+
+            if($res) {
+                return $this->result(['jump_url' =>url('news/index')] , 1, 'ok');
+            }
+            return $this->result('', 0, '修改失败');          
+        }else{
+            $data = input('param.');
+            try {
+                //获取到数据对象(简单的逻辑没必要另外写到model层)
+                $new = model('News')->get(['id' => $data['id']]);
+            }catch(\Exception $e){
+                $this->error($e->getMessage());
+            } 
+            return $this->fetch('',[
+                'cats' => config('cat.lists'),
+                'new' => $new,
+            ]); 
+        }        
+    }
 }
