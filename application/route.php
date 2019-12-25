@@ -9,13 +9,15 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+use think\Route;
+// 获取数据
+Route::get('test', 'api/Test/index');
 
-];
+// 修改数据
+Route::put('test/:id', 'api/Test/update');
+
+// 删除数据
+Route::delete('test/:id', 'api/Test/delete');
+
+
+Route::resource('test','api/Test');

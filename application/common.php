@@ -16,7 +16,7 @@
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-18
- * @param [type] $obj
+ * @param obj $obj
  * @return string
  */
 function pagination($obj) {
@@ -32,7 +32,7 @@ function pagination($obj) {
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-18
- * @param [type] $catId
+ * @param int $catId
  * @return void|string
  */
 function getCatName($catId) {
@@ -48,7 +48,7 @@ function getCatName($catId) {
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-18
- * @param [type] $num
+ * @param int $num
  * @return string
  */
 function isYesNo($num) {
@@ -60,8 +60,8 @@ function isYesNo($num) {
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-22
- * @param [type] $id
- * @param [type] $status
+ * @param int $id
+ * @param int $status
  * @return string
  */
 function status($id, $status) {
@@ -77,4 +77,24 @@ function status($id, $status) {
         <span class='label label-danger radius'>待审</span></a>";
     }
     return $str;
+}
+
+/**
+ * 通用化API接口数据
+ *
+ * @Author sky 1127820180@qq.com
+ * @DateTime 2019-12-24
+ * @param int $status      业务状态码
+ * @param string $message  信息提示
+ * @param array $data      数据
+ * @param int $httpCode    http状态码
+ * @return array
+ */
+function show($status, $message, $data=[], $httpCode=200) {
+    $data = [
+        'status' => $status,
+        'message' => $message,
+        'data' => $data,
+    ];
+    return json($data, $httpCode);
 }
