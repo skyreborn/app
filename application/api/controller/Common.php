@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-25 18:25:25
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-27 17:16:58
+ * @LastEditTime : 2019-12-28 13:04:19
  */
 namespace app\api\controller;
 
@@ -69,5 +69,27 @@ class Common extends Controller {
         //echo  IAuth::setSign($data);exit;
         $str = '60S2hjeI1eTGjBOYIggHJoGcIn5BfSJCAIWmVQQj9gwOEgTqlNx1glUa3go6oWzf';
         echo (new Aes())->decrypt($str);exit;
+    }
+
+    /**
+     * 处理新闻数据
+     *
+     * @Author sky 1127820180@qq.com
+     * @DateTime 2019-12-28
+     * @param array $news
+     * @return void
+     */
+    protected function getDealNews($news = []) {
+        if(empty($news)) {
+            return [];
+        }
+
+        $cats = config('cat.lists');
+
+        foreach($news as $key => $new) {
+            $news[$key]['catname'] = $cats[$new['catid']] ? $cats[$new['catid']] : '-';
+        }
+
+        return $news;
     }
 }

@@ -24,3 +24,5 @@ Route::resource('test','api/Test');
 
 // 获取栏目路由
 Route::get('api/:ver/cat','api/:ver.Cat/read');
+// 获取首页数据路由
+Route::get('api/:ver/index','api/:ver.Index/index');
