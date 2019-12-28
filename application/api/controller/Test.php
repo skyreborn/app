@@ -7,7 +7,6 @@
  */
 namespace app\api\controller;
 
-use think\Controller;
 use app\common\lib\exception\ApiException;
 
 class Test extends Common {

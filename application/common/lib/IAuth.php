@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-04 09:40:49
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-27 17:04:57
+ * @LastEditTime : 2019-12-27 17:43:57
  */
 namespace app\common\lib;
 
@@ -63,13 +63,15 @@ class IAuth {
         if(!is_array($arr) || empty($arr['did'])|| $arr['did'] != $data['did']) {
 			return false;
 		}
-
-		if ((time() - ceil($arr['time'] / 1000)) > config('app.app_sign_time')) {
-			return false;
-		}
-		// 唯一性判定
-		if(Cache::get($data['sign'])) {
-			return false;
+		
+		if(!config('app_debug')) {
+			if ((time() - ceil($arr['time'] / 1000)) > config('app.app_sign_time')) {
+				return false;
+			}
+			// 唯一性判定
+			if(Cache::get($data['sign'])) {
+				return false;
+			}
 		}
 		return true;
 	}
