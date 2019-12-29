@@ -5,12 +5,13 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-29 16:48:00
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-29 17:05:39
+ * @LastEditTime : 2019-12-29 17:59:22
  */
 
 namespace app\api\controller\v1;
 
 use app\api\controller\Common;
+use app\common\lib\exception\ApiException;
 
 class Rank extends Common {
     /**

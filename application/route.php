@@ -31,5 +31,5 @@ Route::get('api/:ver/index','api/:ver.Index/index');
 // 根据栏目获取新闻列表接口路由
 Route::resource('api/:ver/news', 'api/:ver.News');
 
-// 获取排行榜接口
+// 获取排行榜接口路由
 Route::resource('api/:ver/rank', 'api/:ver.Rank');
