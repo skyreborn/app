@@ -22,7 +22,11 @@ Route::delete('test/:id', 'api/Test/delete');
 
 Route::resource('test','api/Test');
 
-// 获取栏目路由
+// 获取栏目接口路由
 Route::get('api/:ver/cat','api/:ver.Cat/read');
-// 获取首页数据路由
+
+// 获取首页数据接口路由
 Route::get('api/:ver/index','api/:ver.Index/index');
+
+// 根据栏目获取新闻接口数据
+Route::resource('api/:ver/news', 'api/:ver.News');

@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-25 18:25:25
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-28 13:04:19
+ * @LastEditTime : 2019-12-29 10:22:53
  */
 namespace app\api\controller;
 
@@ -17,15 +17,16 @@ use app\common\lib\Time;
 use think\Cache;
 
 class Common extends Controller {
-    /**
-     * header信息
-     *
-     * @var string
-     * @Author sky 1127820180@qq.com
-     * @DateTime 2019-12-27
-     */
+ 
+    // header信息
     public $headers = '';
-    
+	// 第几页
+	public $page = '';
+	// 每页显示条数
+	public $size = '';
+	// 查询条件的起始值
+	public $from = 0;
+
     /**
      * 初始化的方法
      *
@@ -92,4 +93,19 @@ class Common extends Controller {
 
         return $news;
     }
+
+	/**
+	 * 获取分页page size 内容 查询的起始值from
+	 * 
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2019-12-19
+	 * @param array $data
+	 * @return void
+	 */
+	public function getPageAndSizeAndFrom($data) {
+
+        $this->page = !empty($data['page']) ? $data['page'] : 1;
+		$this->size = !empty($data['size']) ? $data['size'] : config('paginate.list_rows');	
+		$this->from = ($this->page - 1) * ($this->size);
+	}
 }

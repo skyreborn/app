@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-15 19:06:53
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-28 12:44:50
+ * @LastEditTime : 2019-12-29 12:16:17
  */
 namespace app\common\model;
 use think\Model;
@@ -41,13 +41,17 @@ class News extends Base {
      * @return object
      */
     public function getNewsByCondition($condition = [], $from = 0, $size = 5) {
-        // 筛选条件
-        $condition['status'] = [
-            'neq', config('code.status_delete')
-        ];
+        if(!isset($condition['status'])) {
+            // 筛选条件
+            $condition['status'] = [
+                'neq', config('code.status_delete')
+            ];
+        }
+
         // 排序方式
         $order = ['id' => 'desc'];
         $result = $this->where($condition)
+        ->field($this->_getListField())
         ->limit($from, $size)
         ->order($order)
         ->select();
@@ -64,11 +68,12 @@ class News extends Base {
      * @return int
      */
     public function getNesCountByCondition($condition = []) {
-        // 筛选条件
-        $condition['status'] = [
-            'neq', config('code.status_delete')
-        ];
-        
+        if(!isset($condition['status'])) { 
+            // 筛选条件
+            $condition['status'] = [
+                'neq', config('code.status_delete')
+            ];
+        }
         return $this->where($condition)
         ->count();
     }

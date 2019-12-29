@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-27 17:26:37
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-28 12:59:53
+ * @LastEditTime : 2019-12-28 17:50:03
  */
 namespace app\api\controller\v1;
 use app\api\controller\Common;
@@ -26,12 +26,12 @@ class Index extends Common {
       // 推荐数据
       $positions = model('News')->getPositionNormalNews();
       $positions = $this->getDealNews($positions);
+      
       // 封装数据
       $result = [
           'heads' => $heads,
           'positions' => $positions,
       ];
-
 
       return show(config('code.success'), 'OK', $result, 200);
   }

@@ -45,7 +45,7 @@ class Base extends Controller {
 	 * 
 	 * @Author sky 1127820180@qq.com
 	 * @DateTime 2019-12-19
-	 * @param [type] $data
+	 * @param array $data
 	 * @return void
 	 */
 	public function getPageAndSizeAndFrom($data) {
