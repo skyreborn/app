@@ -80,7 +80,7 @@ function status($id, $status) {
 }
 
 /**
- * 通用化API接口数据
+ * 通用化API接口数据格式
  *
  * @Author sky 1127820180@qq.com
  * @DateTime 2019-12-24
