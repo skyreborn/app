@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-27 17:26:37
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-29 22:25:04
+ * @LastEditTime : 2020-01-04 22:50:18
  */
 namespace app\api\controller\v1;
 use app\api\controller\Common;
@@ -57,6 +57,17 @@ class Index extends Common {
             $version->is_update = 0; // 0不需要更新 1需要更新 2强制更新
         }
 
+        // 记录用户的基本信息 用于统计
+        $actives = [
+            'version' => $this->headers['version'],
+            'app_type' => $this->headers['app_type'],
+            'did' => $this->headers['did'],
+        ];
+        try {
+            model('AppActive')->add($actives);
+        }catch (\Exception $e) {
+
+        }
         return show(config('code.success'), 'OK', $version, 200);
     }
 }
