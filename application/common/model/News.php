@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-15 19:06:53
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-29 12:16:17
+ * @LastEditTime : 2019-12-29 22:02:43
  */
 namespace app\common\model;
 use think\Model;
@@ -50,11 +50,7 @@ class News extends Base {
 
         // 排序方式
         $order = ['id' => 'desc'];
-        $result = $this->where($condition)
-        ->field($this->_getListField())
-        ->limit($from, $size)
-        ->order($order)
-        ->select();
+        $result = $this->where($condition)->field($this->_getListField())->limit($from, $size)->order($order)->select();
         //echo $this->getLastSql();
         return $result;
     }
@@ -74,8 +70,7 @@ class News extends Base {
                 'neq', config('code.status_delete')
             ];
         }
-        return $this->where($condition)
-        ->count();
+        return $this->where($condition)->count();
     }
 
     /**
@@ -96,11 +91,7 @@ class News extends Base {
             'id' => 'desc',
         ];
 
-        return $this->where($data)
-            ->field($this->_getListField())
-            ->order($order)
-            ->limit($num)
-            ->select();
+        return $this->where($data)->field($this->_getListField())->order($order)->limit($num)->select();
     }
 
     /**
@@ -121,11 +112,7 @@ class News extends Base {
             'id' => 'desc',
         ];
 
-        return $this->where($data)
-            ->field($this->_getListField())
-            ->order($order)
-            ->limit($num)
-            ->select();
+        return $this->where($data)->field($this->_getListField())->order($order)->limit($num)->select();
     }
 
     /**
@@ -145,11 +132,7 @@ class News extends Base {
             'read_count' => 'desc',
         ];
 
-        return $this->where($data)
-            ->field($this->_getListField())
-            ->order($order)
-            ->limit($num)
-            ->select();
+        return $this->where($data)->field($this->_getListField())->order($order)->limit($num)->select();
     }
 
     /**

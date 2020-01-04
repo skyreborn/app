@@ -22,6 +22,9 @@ Route::delete('test/:id', 'api/Test/delete');
 
 Route::resource('test','api/Test');
 
+// 版本更新接口路由
+Route::get('api/:ver/init','api/:ver.Index/init');
+
 // 获取栏目接口路由
 Route::get('api/:ver/cat','api/:ver.Cat/read');
 
