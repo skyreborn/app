@@ -18,12 +18,20 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "^5.0",
-        "qiniu/php-sdk": "^7.2"
+        "qiniu/php-sdk": "^7.2",
+        "alibabacloud/client": "^1.5",
+        "alibabacloud/sdk": "^1.8"
     },
     "extra": {
         "think-path": "thinkphp"
     },
     "config": {
         "preferred-install": "dist"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
     }
 }

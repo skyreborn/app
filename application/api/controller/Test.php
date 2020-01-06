@@ -8,9 +8,12 @@
 namespace app\api\controller;
 
 use app\common\lib\exception\ApiException;
+use AlibabaCloud\Client\AlibabaCloud;
+use AlibabaCloud\Client\Exception\ClientException;
+use AlibabaCloud\Client\Exception\ServerException;
 
 class Test extends Common {
-    public function index() {
+    public function indexggg() {
        return [
            'sdfdsdf',
            'dfsdfsd',
@@ -31,5 +34,41 @@ class Test extends Common {
         $data = input('post.');
         
         return show(1,'ok',input('post.'), 201);
+    }
+
+    public function index() {
+
+        $PhoneNumbers = "15296599454";
+
+        $TemplateParam = "{\"code\":\"1111\"}";
+
+        AlibabaCloud::accessKeyClient(config('aliyun.accessKeyId'), config('aliyun.accessSecret'))
+                        ->regionId('cn-hangzhou')
+                        ->asDefaultClient();
+
+        try {
+            $result = AlibabaCloud::rpc()
+                                ->product('Dysmsapi')
+                                // ->scheme('https') // https | http
+                                ->version('2017-05-25')
+                                ->action('SendSms')
+                                ->method('POST')
+                                ->host('dysmsapi.aliyuncs.com')
+                                ->options([
+                                                'query' => [
+                                                'RegionId' => "cn-hangzhou",
+                                                'PhoneNumbers' => $PhoneNumbers,
+                                                'SignName' => config('aliyun.SignName'),
+                                                'TemplateCode' => config('aliyun.TemplateCode'),
+                                                'TemplateParam' => $TemplateParam,
+                                                ],
+                                            ])
+                                ->request();
+            print_r($result->toArray());
+        } catch (ClientException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        } catch (ServerException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        }
     }
 }
