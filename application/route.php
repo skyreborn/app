@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-30 10:13:21
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-06 15:56:04
+ * @LastEditTime : 2020-01-09 11:10:07
  */
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -44,3 +44,6 @@ Route::resource('api/:ver/news', 'api/:ver.News');
 
 // 获取排行榜接口路由
 Route::resource('api/:ver/rank', 'api/:ver.Rank');
+
+// 短信验证码相关
+Route::resource('api/:ver/identify', 'api/:ver.identify');

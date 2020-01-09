@@ -11,9 +11,10 @@ use app\common\lib\exception\ApiException;
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
+use app\common\lib\Alidayu;
 
 class Test extends Common {
-    public function indexggg() {
+    public function index() {
        return [
            'sdfdsdf',
            'dfsdfsd',
@@ -36,7 +37,7 @@ class Test extends Common {
         return show(1,'ok',input('post.'), 201);
     }
 
-    public function index() {
+    public function sendSms() {
 
         $PhoneNumbers = "15296599454";
 
@@ -45,7 +46,6 @@ class Test extends Common {
         AlibabaCloud::accessKeyClient(config('aliyun.accessKeyId'), config('aliyun.accessSecret'))
                         ->regionId('cn-hangzhou')
                         ->asDefaultClient();
-
         try {
             $result = AlibabaCloud::rpc()
                                 ->product('Dysmsapi')
@@ -70,5 +70,12 @@ class Test extends Common {
         } catch (ServerException $e) {
             echo $e->getErrorMessage() . PHP_EOL;
         }
+    }
+
+    public function testSend() {
+
+        $result = Alidayu::getInstance()->setSmsIdentify('15296599454');
+        return show(1,'ok',$result, 201);
+
     }
 }
