@@ -7,8 +7,8 @@
  */
 
 return [
-    'ak' => 'BDc1uDFURHlKt2mMWEL38wKrPaEDIhumLwoA2e41',
-    'sk' => '_JJeRZHwEql_CUNx3oQGZegwPmPwncUBKQlS21Af',
-    'bucket' => 'tsmengapp',
-    'image_url' => 'http://q2cef8pde.bkt.clouddn.com',
+    'ak' => '',
+    'sk' => '',
+    'bucket' => '',
+    'image_url' => '',
 ];
