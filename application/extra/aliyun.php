@@ -5,12 +5,12 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2020-01-06 14:35:33
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-07 16:08:29
+ * @LastEditTime : 2020-01-12 22:03:51
  */
 return [
-    'SignName' => 'sky新闻app',
-    'TemplateCode' => 'SMS_181867799',
-    'accessKeyId' => 'LTAI4FtsTRz756ZuassQ5RJ7',
-    'accessSecret' => 'y3l0dzbO7vaPHVrTlg9lgMWIS6pWq3',
+    'SignName' => '',
+    'TemplateCode' => '',
+    'accessKeyId' => '',
+    'accessSecret' => '',
     'identify_time' => 120,
  ];

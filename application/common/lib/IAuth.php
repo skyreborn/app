@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-04 09:40:49
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2019-12-27 17:43:57
+ * @LastEditTime : 2020-01-09 18:02:54
  */
 namespace app\common\lib;
 
@@ -74,6 +74,20 @@ class IAuth {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * 设置token（唯一性）
+	 *
+	 * @Author sky 1127820180@qq.com
+	 * @DateTime 2020-01-09
+	 * @param string $phone
+	 * @return string
+	 */
+	public static function setAppLoginToken($phone = '') {
+		$str = md5(uniqid(md5(microtime(true)), true));
+		$str = sha1($str.$phone);
+		return $str;
 	}
 }
 

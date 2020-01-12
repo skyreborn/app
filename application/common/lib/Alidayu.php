@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2020-01-06 17:58:36
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-09 11:47:15
+ * @LastEditTime : 2020-01-09 18:05:45
  */
 
 namespace app\common\lib;
@@ -112,7 +112,7 @@ class Alidayu {
             Log::write(self::LOG_TPL."set----".$e->getErrorMessage());
         }
 
-        if($result['Code'] === "OK") {
+        if($result['Code'] == "OK") {
             // 设置验证码失效时间
             Cache::set($phone, $code, config('aliyun.identify_time'));
             return true;
