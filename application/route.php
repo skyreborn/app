@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-30 10:13:21
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-13 00:29:17
+ * @LastEditTime : 2020-01-15 17:11:43
  */
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -51,5 +51,11 @@ Route::resource('api/:ver/identify', 'api/:ver.identify');
 // 登录的路由
 Route::post('api/:ver/login', 'api/:ver.Login/save');
 
-// 登录的路由
-Route::post('api/:ver/user', 'api/:ver.User/save');
+// 获取用户信息（通过get方法后面跟/id）
+Route::resource('api/:ver/user', 'api/:ver.user');
+
+// 图片上传接口路由
+Route::post('api/:ver/image', 'api/:ver.Image/save');
+
+// 检测用户昵称是否存在接口路由
+Route::Post('api/:ver/isUserName','api/:ver.User/isUserName');

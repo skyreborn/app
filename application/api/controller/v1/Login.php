@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2020-01-09 18:16:04
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-12 10:45:31
+ * @LastEditTime : 2020-01-16 00:06:42
  */
 namespace app\api\controller\v1;
 
@@ -27,14 +27,15 @@ class Login extends Common {
         if(empty($param['phone'])) {
             return show(config('code.error'), '手机号码不合法', '', 404);
         }
-        if(empty($param['code'])) {
-            return show(config('code.error'), '手机短信验证码不合法', '', 404);
+        if(empty($param['code']) && empty($param['password'])) {
+            return show(config('code.error'), '手机短信验证码或密码不合法', '', 404);
         }
         // validate 严格校验（未完待续）
-
-        $code = Alidayu::getInstance()->checkSmsIdentify($param['phone']);
-        if($code != $param['code']) {
-            return show(config('code.error'), '手机短信验证码不存在', '', 404);
+        if(!empty($param['code'])){
+            $code = Alidayu::getInstance()->checkSmsIdentify($param['phone']);
+            if($code != $param['code']) {
+                return show(config('code.error'), '手机短信验证码不存在', '', 404);
+            }
         }
 
         $token = IAuth::setAppLoginToken($param['phone']);
@@ -46,6 +47,11 @@ class Login extends Common {
         // 查询手机号是否存在
         $user = User::get(['phone' => $param['phone']]);
         if($user && $user->status == 1) {
+            if(!empty($param['password'])) {
+                if($user->password != IAuth::setPassword($param['password'])) {
+                    return show(config('code.error'), '密码不正确', [], 403);
+                }
+            }
             try {
                 // 更新登录信息
                 $id = model('User')->save($data, ['phone' => $param['phone']]);
@@ -53,14 +59,18 @@ class Login extends Common {
                 return new ApiException('error', 400);
             }
         }else {
-                // 第一次登录 注册数据
-                $data['username'] ='sky粉'.$param['phone'];
-                $data['status'] = 1;
-                $data['phone'] = $param['phone'];
-                try {
-                    $id = model('User')->add($data);
-                } catch (\Excepton $e) {
-                    return new ApiException('error', 400);
+                if(!empty($param['code'])) {
+                    // 第一次登录 注册数据
+                    $data['username'] ='sky粉'.$param['phone'];
+                    $data['status'] = 1;
+                    $data['phone'] = $param['phone'];
+                    try {
+                        $id = model('User')->add($data);
+                    } catch (\Excepton $e) {
+                        return new ApiException('error', 400);
+                    }
+                } else {
+                    return show(config('code.error'), '用户不存在', [], 403);
                 }
         }
 
