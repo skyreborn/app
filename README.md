@@ -4,7 +4,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-30 10:12:32
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-16 10:40:16
+ * @LastEditTime : 2020-01-16 10:42:29
  -->
 
 app接口开发
@@ -28,12 +28,12 @@ http://localhost/app/public/index.php/api/v1/news/1
 获取排行榜接口地址：  
 http://localhost/app/public/index.php/api/v1/rank  
 短信验证码相关:  
-http://localhost/app/public/index.php/api/v1/identify
+http://localhost/app/public/index.php/api/v1/identify  
 登录的路由:  
-http://localhost/app/public/index.php/api/v1/login
+http://localhost/app/public/index.php/api/v1/login  
 获取用户信息:  
-GET:http://localhost/app/public/index.php/api/v1/user/1  
-更新用户信息：  
+GET:http://localhost/app/public/index.php/api/v1/user/1   
+更新用户信息：    
 PUT:http://localhost/app/public/index.php/api/v1/user/1  
 图片上传接口路由:  
 http://localhost/app/public/index.php/api/v1/image  
