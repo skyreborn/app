@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-30 10:13:21
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-15 17:11:43
+ * @LastEditTime : 2020-01-17 14:22:27
  */
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -59,3 +59,9 @@ Route::post('api/:ver/image', 'api/:ver.Image/save');
 
 // 检测用户昵称是否存在接口路由
 Route::Post('api/:ver/isUserName','api/:ver.User/isUserName');
+
+// 文章点赞接口路由
+Route::Post('api/:ver/upvote','api/:ver.Upvote/save');
+
+// 文章取消点赞接口路由
+Route::Post('api/:ver/upvote','api/:ver.Upvote/save');
