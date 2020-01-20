@@ -69,6 +69,7 @@ class ComposerStaticInit547f1ba8138a17d6b867624279d0c7eb
         'J' => 
         array (
             'JmesPath\\' => 9,
+            'JPush\\' => 6,
         ),
         'G' => 
         array (
@@ -176,6 +177,10 @@ class ComposerStaticInit547f1ba8138a17d6b867624279d0c7eb
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
+        ),
+        'JPush\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jpush/jpush/src/JPush',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

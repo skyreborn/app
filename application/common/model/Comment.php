@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2020-01-10 11:29:13
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-19 23:07:05
+ * @LastEditTime : 2020-01-20 17:58:40
  */
 
 namespace app\common\model;
@@ -16,7 +16,7 @@ use app\common\model\Base;
 class Comment extends Base {
     
     /**
-     * 通过条件获取评论的数量
+     * 通过条件获取评论的数量(join存在性能问题思考如何优化)
      *
      * @Author sky 1127820180@qq.com
      * @DateTime 2020-01-19
@@ -33,7 +33,7 @@ class Comment extends Base {
     }
 
     /**
-     * 通过条件获取评论列表数据
+     * 通过条件获取评论列表数据(join存在性能问题思考如何优化)
      *
      * @Author sky 1127820180@qq.com
      * @DateTime 2020-01-19
@@ -46,7 +46,7 @@ class Comment extends Base {
             ->limit($from = 0,  $size)
             ->order(['a.id' => 'desc'])
             ->select();
-
+ 
         return $result; 
     }
 }
