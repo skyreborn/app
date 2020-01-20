@@ -5,7 +5,7 @@
  * @Autor: sky 1127820180@qq.com
  * @Date: 2019-12-30 10:13:21
  * @LastEditors  : sky 1127820180@qq.com
- * @LastEditTime : 2020-01-17 21:56:51
+ * @LastEditTime : 2020-01-18 19:58:24
  */
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -71,3 +71,6 @@ Route::get('api/:ver/upvote/:id','api/:ver.Upvote/read');
 
 // 评论接口路由
 Route::Post('api/:ver/comment','api/:ver.Comment/save');
+
+// 获取评论列表接口路由
+Route::get('api/:ver/comment/:id','api/:ver.Comment/read');
